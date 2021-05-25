@@ -1,0 +1,4 @@
+Rec,AvgDayCons,AvgNightCons,InCommunity,blbla,hello
+rec1,,"(150.0, 200.0)",False,8.0,
+rec2,"(30.0, 100.0]",,,8.0,
+rec2,"(30.0, 120.0]","(50.0, 150.0]",False,3.0,

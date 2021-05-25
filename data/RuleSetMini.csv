@@ -1,0 +1,4 @@
+Rec,AvgDayCons,AvgNightCons,InCommunity
+rec1,,"(150, 200)",False
+rec2,"(30, 100]",,
+rec2,"(30, 120]","(50, 150]",False
