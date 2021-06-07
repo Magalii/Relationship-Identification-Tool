@@ -1,5 +1,4 @@
-# Rules Connections Verification
-
+# Relationship Identification Tool
 This tool was created as part of my master thesis to manage a set of rules so it can later be used in a rule-based expert system.
 It allows for the management of the rule set by modification, addition or deletion of rules. The main feature is to allow to visualize the potential connections between the different rules so the user can see which different rules could apply to the same situation.
 
