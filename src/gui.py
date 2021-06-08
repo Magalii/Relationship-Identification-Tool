@@ -9,9 +9,9 @@ from rule_set import *
 from connection import *
 
 #Global variables
-nbr_rows = 9
-nbr_cols = 6
-width = 14
+nbr_rows = 12
+nbr_cols = 8
+width = 20
 ruleset = RuleSet([])
 window = None
 colors = {Connection.REFERENCE: 'orchid4', Connection.DISCONNECTED: 'white', Connection.EQUAL_DIFF:'DeepSkyBlue4' , Connection.INCLUSION_DIFF:'DeepSkyBlue3' , Connection.OVERLAP_DIFF:'SkyBlue1' , Connection.EQUAL_SAME:'SpringGreen4' , Connection.INCLUSION_SAME:'SpringGreen3' , Connection.OVERLAP_SAME:'pale green' }
@@ -30,7 +30,7 @@ def run_gui():
     scrollable_set = [sg.Column(header_row + input_rows, size=(width*(nbr_cols+1)*8,nbr_rows*25), scrollable=True)]
     actions1 = [sg.Text('Index of rule to check connections with:'), sg.Input(size=(4,1),key='to_check'),sg.Button('Check')]
     actions2 = [sg.Button('Update'), sg.Button('Delete rule:'), sg.Input(size=(4,1),key='del_rule'), sg.Button('Delete attribute:'), sg.Input(size=(width,1),key='del_attr')]
-    actions3 = [sg.Open(), sg.Button('Increase Table size'), sg.Button('Remove changes'), sg.Button('Delete ruleset'), sg.Button('Update & Save'), ]
+    actions3 = [sg.Open(), sg.Button('Increase Table size'), sg.Button('Remove changes'), sg.Button('Delete rule set'), sg.Button('Update & Save'), ]
 
     layout = [intro,
             scrollable_set,
@@ -151,7 +151,7 @@ def run_gui():
         elif event == 'Remove changes':
             erase(window,headers=True,values=True,connections=True)
             display_set(window)
-        elif event == 'Delete ruleset':
+        elif event == 'Delete rule set':
             answer = sg.popup_ok_cancel("No unsaved changes will be saved. Proceed to clear?")
             print(answer)
             if answer == 'OK':
@@ -184,7 +184,7 @@ def resize_window(rows,cols):
     scrollable_set = [sg.Column(header_row + input_rows, size=(width*m*8,n*25), scrollable=True)]
     actions1 = [sg.Text('Index of rule to check connections with:'), sg.Input(size=(4,1),key='to_check'),sg.Button('Check')]
     actions2 = [sg.Button('Update'), sg.Button('Delete rule:'), sg.Input(size=(4,1),key='del_rule'), sg.Button('Delete attribute:'), sg.Input(size=(width,1),key='del_attr')]
-    actions3 = [sg.Open(), sg.Button('Increase Table size'), sg.Button('Remove changes'), sg.Button('Delete ruleset'), sg.Button('Update & Save'), ]
+    actions3 = [sg.Open(), sg.Button('Increase Table size'), sg.Button('Remove changes'), sg.Button('Delete rule set'), sg.Button('Update & Save'), ]
     layout = [intro, scrollable_set, actions1, actions2, actions3]
     new_window = sg.Window('Window Title', return_keyboard_events=True).Layout(layout)
     window.close()
