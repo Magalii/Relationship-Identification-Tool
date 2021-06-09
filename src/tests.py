@@ -67,29 +67,6 @@ class TestUtilsMethods(unittest.TestCase):
         #print(ref.set.sort_index(axis=1))
         #print(checked.set.sort_index(axis=1))
         self.assertTrue(checked.set.sort_index(axis=1).equals(ref.set.sort_index(axis=1)))
-    
-    def test_parse_csv_wesmart(self):
-        ''' Check if parse_cv() produces a list a of rules that gives an equivalent DataFrame when given as argument when initializing a RuleSet (order of the columns is ignored)'''
-        #reference ruleset
-        r1 = {'Rec': 'R1', 'AvgDailyOfftakeCons11to16-AvgDailyOfftakeCons': pd.Interval(0.75,float('inf'),'right'), 'AvgDailyOfftakeConsClosedDays-AvgDailyOfftakeCons': pd.Interval(0.4,float('inf'),'right'),'MinDailyOfftakeAvailability': 3.0}
-        r2 = {'Rec': 'R2', 'AvgDailyOfftakeCons11to16-AvgDailyOfftakeCons': pd.Interval(0.75,float('inf'),'right'), 'AvgDailyOfftakeConsClosedDays-AvgDailyOfftakeCons': pd.Interval(0.0,0.4,'both'),'MinDailyOfftakeAvailability': 3.0}
-        r3 = {'Rec': 'R3', 'AvgDailyOfftakeCons22to6-Self': pd.Interval(0.8,float('inf'),'right')}
-        r4 = {'Rec': 'R4', 'AvgOfftakeConsThProd-AvgOfftakeCons': pd.Interval(0.35,float('inf'),'both'), 'SumInjThProd-SumProdThProd': pd.Interval(float('-inf'),0.35,'both'), 'OfftakeConsObs': pd.Interval(61.0,float('inf'),'both')}
-        r5 = {'Rec': 'R5', 'AvgOfftakeConsThProd-AvgOfftakeCons': pd.Interval(0.35,float('inf'),'both'), 'SumInjThProd-SumProdThProd': pd.Interval(0.45,float('inf'),'both'), 'MinOfftakeAvailability': 3.0, 'MinProdAvailability': 3.0, 'MinInjAvailability': 3.0, 'OfftakeConsObs': pd.Interval(61.0,float('inf'),'both')}
-        r6 = {'Rec': 'R6', 'MinConsHighkWh': pd.Interval(400.0,float('inf'),'right'), 'OfftakeConsObs': pd.Interval(61.0,float('inf'),'both')}
-        r7 = {'Rec': 'R7', 'OfftakeConsObs': pd.Interval(0.0,60.0,'both')}
-        r8 = {'Rec': 'R8', 'AvgOfftakeConsPast3-AvgOfftakeConsPast8': pd.Interval(1.2,float('inf'),'both'),'MinOfftakeAvailability': 9, 'OfftakeConsObs': pd.Interval(61.0,float('inf'),'both')}
-        r9 = {'Rec': 'R9', 'MaxDailyOfftakePeak-AvgDailyOfftakePeak': pd.Interval(1.3,float('inf'),'right'), 'OfftakePeakObs': pd.Interval(61.0,float('inf'),'both')}
-        r10 = {'Rec': 'R10', 'OfftakePeakObs': pd.Interval(0.0,60.0,'both')}
-        rules = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10]
-        ref = rs.RuleSet(rules)
-        #tested ruleset
-        csv_name = "data/RuleSetWeSmartAdapted.csv"
-        parsed = u.parse_csv(csv_name)
-        checked = rs.RuleSet(parsed)
-        #print(ref.set.sort_index(axis=1))
-        #print(checked.set.sort_index(axis=1))
-        self.assertTrue(checked.set.sort_index(axis=1).equals(ref.set.sort_index(axis=1)))
 
     def test_same_type(self):
         b1 = True; b2 = False; b1np = np.array([True]); b2np = np.array([False])
