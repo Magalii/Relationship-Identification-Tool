@@ -395,5 +395,7 @@ def update(values):
         #print("---pm---")
         #print(ruleset.pm)
         return True
-    
-run_gui()
+
+
+if __name__ == '__main__':
+    run_gui()

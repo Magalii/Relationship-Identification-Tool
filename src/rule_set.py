@@ -421,6 +421,3 @@ class RuleSet:
     
     def to_csv(self,file_name):
         self.set.to_csv(file_name,index=False)
-
-    
-    
