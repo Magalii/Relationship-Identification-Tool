@@ -10,7 +10,7 @@ from connection import *
 
 #Global variables
 nbr_rows = 12
-nbr_cols = 8
+nbr_cols = 5
 width = 20
 ruleset = RuleSet([])
 window = None
@@ -356,11 +356,11 @@ def update(values):
                         if input_val != old_val or not ruleset.same_type(input_val,old_val):
                             #print("input_val type: " +str(type(input_val)) + "old_val type: " +str(type(old_val)))
                             try:
-                                print("input_val type: " +str(type(input_val)) + str(input_val)+ "old_val type: " +str(type(old_val))+str(old_val) + " col_type "+str(col_type))
+                                #print("input_val type: " +str(type(input_val)) + str(input_val)+ "old_val type: " +str(type(old_val))+str(old_val) + " col_type "+str(col_type))
                                 ruleset.update_val(i,j,input_val)
-                            except TypeError:
+                            except TypeError as te:
                                 problem = True
-                                sg.popup_ok("Not all values of attribute " + ruleset.attr_names[j] + " have the same type."+warning)
+                                sg.popup_ok("All values of an attribute must have the same type which can't be modified after it has been defined.\nError for attribute " + ruleset.attr_names[j] +warning)
                 except ValueError as ve:
                     problem = True
                     sg.popup_ok(str(ve) + " Position: ("+str(i)+","+str(j)+")"+warning)
