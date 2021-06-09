@@ -68,22 +68,6 @@ class TestUtilsMethods(unittest.TestCase):
         #print(checked.set.sort_index(axis=1))
         self.assertTrue(checked.set.sort_index(axis=1).equals(ref.set.sort_index(axis=1)))
 
-    def test_same_type(self):
-        b1 = True; b2 = False; b1np = np.array([True]); b2np = np.array([False])
-        f1 = 7.0; f2 = 4.2; fnp = np.array([6.9, 9.6])
-        inter1 = pd.Interval(5,6); inter2 = pd.Interval(7,8)
-
-        self.assertTrue(u.same_type(b1,b2))
-        self.assertTrue(u.same_type(b1,b1np[0]))
-        self.assertTrue(u.same_type(b1np[0],b2np[0]))
-        self.assertTrue(u.same_type(f1,f2))
-        self.assertTrue(u.same_type(f1,fnp[0]))
-        self.assertTrue(u.same_type(fnp[1],fnp[0]))
-        self.assertTrue(u.same_type(inter1,inter2))
-        self.assertFalse(u.same_type(b1,fnp[0]))
-        self.assertFalse(u.same_type(f1,b2))
-        self.assertFalse(u.same_type(inter2,fnp[0]))
-
 class TestMiniSet(unittest.TestCase):
     def setUp(self):
         self.csv_name = "data/RuleSetMini.csv"
@@ -655,6 +639,22 @@ class TestMiniSet(unittest.TestCase):
         for i in range(self.ruleset.n):
             for j in range(self.ruleset.n):
                 self.assertEqual(self.ruleset.pm[i,j],ref_pm[i][j])
+
+    def test_same_type(self):
+        b1 = True; b2 = False; b1np = np.array([True]); b2np = np.array([False])
+        f1 = 7.0; f2 = 4.2; fnp = np.array([6.9, 9.6])
+        inter1 = pd.Interval(5,6); inter2 = pd.Interval(7,8)
+
+        self.assertTrue(self.ruleset.same_type(b1,b2))
+        self.assertTrue(self.ruleset.same_type(b1,b1np[0]))
+        self.assertTrue(self.ruleset.same_type(b1np[0],b2np[0]))
+        self.assertTrue(self.ruleset.same_type(f1,f2))
+        self.assertTrue(self.ruleset.same_type(f1,fnp[0]))
+        self.assertTrue(self.ruleset.same_type(fnp[1],fnp[0]))
+        self.assertTrue(self.ruleset.same_type(inter1,inter2))
+        self.assertFalse(self.ruleset.same_type(b1,fnp[0]))
+        self.assertFalse(self.ruleset.same_type(f1,b2))
+        self.assertFalse(self.ruleset.same_type(inter2,fnp[0]))
 
 class TestExtremeCases(unittest.TestCase):
     

@@ -71,14 +71,4 @@ def parse_csv(csv_name):
             rules.append(r)
     return rules
 
-def same_type(val1,val2):
-    ''' Redefine same type relationships to ignore difference between numpy and regular types '''
-    if type(val1) == type(val2):
-        return True
-    elif (isinstance(val1,np.bool_) and isinstance(val2,bool)) or (isinstance(val1,bool) and isinstance(val2,np.bool_)):
-        return True
-    elif (isinstance(val1,np.float64) and isinstance(val2,float)) or (isinstance(val1,float) and isinstance(val2,np.float64)):
-        return True
-    else:
-        return False
 
