@@ -4,13 +4,13 @@ import numpy as np
 import collections as col
 import copy
 
-import utils as u
+import parser
 import rule_set as rs
 from relation import *
 from connection import *
 
 
-class TestUtilsMethods(unittest.TestCase):
+class TestparserMethods(unittest.TestCase):
 
     def test_parse_interval(self):
         #good examples
@@ -23,14 +23,14 @@ class TestUtilsMethods(unittest.TestCase):
         inter7 = "(-inf,inf)" #neither
         inter8 = "]448,448.2)" #neither
 
-        self.assertEqual(u.parse_interval(inter1), pd.Interval(0.8, 4.2, 'neither'))
-        self.assertEqual(u.parse_interval(inter2), pd.Interval(1.8, float('inf'), 'right'))
-        self.assertEqual(u.parse_interval(inter3), pd.Interval(0,2,'right'))
-        self.assertEqual(u.parse_interval(inter4), pd.Interval(0.8, float('inf'), 'neither'))
-        self.assertEqual(u.parse_interval(inter5), pd.Interval(-0.325, 0, 'neither'))
-        self.assertEqual(u.parse_interval(inter6), pd.Interval(float('-inf'), -4.2, 'both'))
-        self.assertEqual(u.parse_interval(inter7), pd.Interval(float('-inf'), float('inf'), 'neither'))
-        self.assertEqual(u.parse_interval(inter8), pd.Interval(448, 448.2, 'neither'))
+        self.assertEqual(parser.parse_interval(inter1), pd.Interval(0.8, 4.2, 'neither'))
+        self.assertEqual(parser.parse_interval(inter2), pd.Interval(1.8, float('inf'), 'right'))
+        self.assertEqual(parser.parse_interval(inter3), pd.Interval(0,2,'right'))
+        self.assertEqual(parser.parse_interval(inter4), pd.Interval(0.8, float('inf'), 'neither'))
+        self.assertEqual(parser.parse_interval(inter5), pd.Interval(-0.325, 0, 'neither'))
+        self.assertEqual(parser.parse_interval(inter6), pd.Interval(float('-inf'), -4.2, 'both'))
+        self.assertEqual(parser.parse_interval(inter7), pd.Interval(float('-inf'), float('inf'), 'neither'))
+        self.assertEqual(parser.parse_interval(inter8), pd.Interval(448, 448.2, 'neither'))
 
     def test_parse_csv_mini(self):
         ''' Check if parse_cv() produces a list a of rules that gives an equivalent DataFrame when given as argument when initializing a RuleSet (order of the columns is ignored)'''
@@ -42,7 +42,7 @@ class TestUtilsMethods(unittest.TestCase):
         ref = rs.RuleSet(rules)
         #tested ruleset
         csv_name = "data/RuleSetMini.csv"
-        parsed = u.parse_csv(csv_name)
+        parsed = parser.parse_csv(csv_name)
         checked = rs.RuleSet(parsed)
         self.assertTrue(checked.set.sort_index(axis=1).equals(ref.set.sort_index(axis=1)))
 
@@ -62,7 +62,7 @@ class TestUtilsMethods(unittest.TestCase):
         ref = rs.RuleSet(rules)
         #tested ruleset
         csv_name = "data/RuleSetSmall.csv"
-        parsed = u.parse_csv(csv_name)
+        parsed = parser.parse_csv(csv_name)
         checked = rs.RuleSet(parsed)
         #print(ref.set.sort_index(axis=1))
         #print(checked.set.sort_index(axis=1))
@@ -71,7 +71,7 @@ class TestUtilsMethods(unittest.TestCase):
 class TestMiniSet(unittest.TestCase):
     def setUp(self):
         self.csv_name = "data/RuleSetMini.csv"
-        self.rules = u.parse_csv(self.csv_name)
+        self.rules = parser.parse_csv(self.csv_name)
         self.ruleset = rs.RuleSet(self.rules)
 
     def test_init(self):

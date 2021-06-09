@@ -4,7 +4,7 @@ import copy
 import collections as col
 
 
-import utils
+import parser
 from rule_set import * 
 from connection import *
 
@@ -56,7 +56,7 @@ def run_gui():
             filename = sg.popup_get_file('filename to open', no_window=True, file_types=(("CSV Files", "*.csv"),))
             if filename is not None and type(filename) in (str,bytes):
                 try:
-                    rules = utils.parse_csv(filename)
+                    rules = parser.parse_csv(filename)
                     ruleset = RuleSet(rules)
                 except ValueError:
                     sg.popup_ok("File selected doesn't contain values in the right format",non_blocking=True)
@@ -242,7 +242,7 @@ def update(values):
             for j in range(1,len(attributes)):
                 input_str = values[(i,j)]
                 try:
-                    input_val = utils.parse_val(input_str)
+                    input_val = parser.parse_val(input_str)
                     vals += [input_val]
                 except ValueError as ve:
                     problem = True
@@ -279,7 +279,7 @@ def update(values):
                 for j in range(1,ruleset.m):
                     input_str = values[(i,j)]
                     try:
-                        input_val = utils.parse_val(input_str)
+                        input_val = parser.parse_val(input_str)
                         val_list += [input_val]
                         rule_to_add = True
                     except ValueError:
@@ -309,7 +309,7 @@ def update(values):
                 for i in range(0,ruleset.n):
                         input_str = values[(i,j)]
                         try:
-                            input_val = utils.parse_val(input_str)
+                            input_val = parser.parse_val(input_str)
                             val_list += [input_val]
                             attr_to_add = True
                         except ValueError:
@@ -340,7 +340,7 @@ def update(values):
             for i in range(ruleset.n):
                 input_str = values[(i,j)]
                 try:
-                    input_val = utils.parse_val(input_str)
+                    input_val = parser.parse_val(input_str)
                     old_val = ruleset.get_val(i,j)
                     #Check for type mismatch within column
                     if col_type is None and not pd.isna(input_val):
