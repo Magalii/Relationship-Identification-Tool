@@ -144,7 +144,6 @@ class TestMiniSet(unittest.TestCase):
         #print(ref)
         #print("checked:")
         #print(checked)
-        #TODO Find a better way to test matrices
         for i in range(a):
             for j in range(b):
                 for k in range(c):

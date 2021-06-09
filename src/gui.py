@@ -10,7 +10,7 @@ from connection import *
 
 #Global variables
 nbr_rows = 12
-nbr_cols = 5
+nbr_cols = 9
 width = 20
 ruleset = RuleSet([])
 window = None

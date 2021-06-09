@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+
 from relation import *
 from connection import *
 
@@ -24,8 +25,8 @@ class RuleSet:
             self.idm = np.zeros((self.m, self.n, self.n))
             #fill in IDC's for all attributes relationships
             for k in range(1,self.m):
-                for i in range(self.n): #TODO Pk paper says 1<=i<n+1 ??
-                    for j in range(i+1,self.n): #TODO Pk paper says j<n+1 ??
+                for i in range(self.n):
+                    for j in range(i+1,self.n):
                         self.idm[k,i,j] = self._val_IDC(self.set.iloc[i,k],self.set.iloc[j,k])
             #fill in IDC's for recommendation relationships
             for i in range(self.n):
@@ -268,14 +269,13 @@ class RuleSet:
     
     '''
     def update_attr(self,new_attr,position):
-        #TODO Test this function
         if new_attr in self.attr_names and new_attr!=self.attr_names[position]:
             raise ValueError("New attribute name can't be the same as an already existing one.")
         if position == 0 and (new_attr == 'Rec' or new_attr == 'Recommendation'):
             raise ValueError("First column must have name 'Rec' or 'Recommendation")
         self.attr_names[position] = new_attr
         self.set.columns = self.attr_names
-'''
+    '''
    
     def add_attr(self,attr_name,val_list=None):
         ''' @val_list: list containing the value of that attribute for each rule

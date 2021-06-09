@@ -6,7 +6,6 @@ def parse_val(val):
     '''Parse string value and change it to appropriate type to be manipulated by RuleSet functions
         Accepted formats: "false" and "true" case insensitive, 'nan', '', "*", string representation of pandas.Interval
     '''
-    #TODO Add more tests for this function (for 'nan' and, float)
     if val == '' or val == '*' or val.lower() == 'nan': return float('nan')
     elif val[0] == '(' or val[0] == '[' or val[0] == ']':
         return parse_interval(val)
@@ -56,25 +55,19 @@ def parse_interval(val):
     return pd.Interval(left_val, right_val, closed)
 
 def parse_csv(csv_name):
-    #TODO Check that values in one column all have the same type
+    #Possible to improve this function by checking that values in one column all have the same type
     ''' Parse csv and returns list of dictionnaries representing the rules'''
     rules = []
     with open(csv_name, 'r') as csv_file:
         reader = csv.DictReader(csv_file)
-        #print(reader)
         for r in reader:
-            #print(r)
             for key, val in r.items():
-                if not key == "Rec" and not key == "Recommendation": #TODO Avoid parsing recommendation without hardcoding column name
-                    #print("key: " + str(key) + " val: " + str(val))
+                if not key == "Rec" and not key == "Recommendation":
                     if isinstance(val,str):
                         try:
                             r[key] = float(val)
                         except ValueError:
-                            #print(" Error is being handled for value " + str(val))
                             r[key] = parse_val(val)
-                    else:
-                        print("value " + str(val) + " is not a string") #TODO This if string else is momentary for debug
             rules.append(r)
     return rules
 
@@ -88,35 +81,4 @@ def same_type(val1,val2):
         return True
     else:
         return False
-'''
-csv_name1 = "data/RuleSetSmall.csv"
-csv_name2 = "data/saved_ruleset.csv"
-csv_name3 = "data/RuleSetWeSmartAdapted.csv"
-
-rules = parse_csv(csv_name3)
-
-rule_set = pd.DataFrame(rules)
-print("Rule set:")
-print(rule_set)
-'''
-
-'''
-print(rule_set.iloc[0,1])
-print(type(rule_set.iloc[0,1]))
-print(rule_set.iloc[0,3])
-print(type(rule_set.iloc[0,3]))
-'''
-
-
-'''
-setRead = pd.read_csv(csv_name2)
-print(setRead)
-print(type(setRead))
-print(setRead.iloc[1,3])
-print(type(setRead.iloc[1,3]))
-print(setRead.iloc[0,2])
-print(type(setRead.iloc[0,2]))
-
-'''
-
 
