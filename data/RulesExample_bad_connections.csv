@@ -1,0 +1,10 @@
+Recommendation,YearlyOfftake,OfftakeMorning,OfftakeAfternoon,MaxProd,InCommunity
+Add 1 solar pannel,"[350,inf]","]-2,inf]","]-2,inf]",FALSE,
+Add 2 solar pannels,"[700, inf]","]-2,inf]","]-2,inf]",FALSE,
+Add at least 3 solar pannels,"[1200,inf]","]-2,inf]","]-2,inf]",FALSE,
+Run devices with high consumption in afternoon instead of morning,,"[0,inf]","[-inf,0]",,
+Run devices with high consumption in morning instead of afternoon,,"[-inf,0]","[0,inf]",,
+Add solar panels,"[350,inf]",,,FALSE,
+Join community to exchange energy with others,,"]0,inf]","[-inf,0[",,FALSE
+Join community to exchange energy with others,,"[-inf,0[","]0,inf]",,FALSE
+Add max number of photovoltaic panels,,,,FALSE,TRUE
