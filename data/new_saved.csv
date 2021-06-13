@@ -1,4 +1,0 @@
-Rec,AvgDayCons,AvgNightCons,InCommunity
-rec1,,"(150.0, 200.0)",False
-rec2,"(30.0, 100.0]",,True
-rec2,"(30.0, 120.0]","(50.0, 150.0]",True
